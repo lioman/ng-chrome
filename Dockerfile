@@ -71,10 +71,9 @@ RUN yarn global add \
   @angular/cli \
   karma-cli
 
-USER seluser
-
 ADD xvfb-chrome /usr/bin/xvfb-chrome
 RUN rm -f /usr/bin/google-chrome
 RUN ln -s /usr/bin/xvfb-chrome /usr/bin/google-chrome
 
+USER seluser
 CMD [ "node" ]
