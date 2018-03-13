@@ -29,7 +29,7 @@ RUN set -ex \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
   done
 
-ENV NODE_VERSION 8.9.0
+ENV NODE_VERSION 8.10.0
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \
@@ -48,7 +48,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-ENV YARN_VERSION 1.3.2
+ENV YARN_VERSION 1.5.1
 
 RUN set -ex \
   && for key in \
@@ -72,5 +72,9 @@ RUN yarn global add \
   karma-cli
 
 USER seluser
+
+ADD xvfb-chrome /usr/bin/xvfb-chrome
+RUN ln -s /usr/bin/xvfb-chrome /usr/bin/google-chrome
+RUN ln -s /usr/bin/xvfb-chrome /usr/bin/chromium-browser
 
 CMD [ "node" ]
