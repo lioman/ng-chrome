@@ -74,7 +74,6 @@ RUN yarn global add \
 USER seluser
 
 ADD xvfb-chrome /usr/bin/xvfb-chrome
-RUN ln -s /usr/bin/xvfb-chrome /usr/bin/google-chrome
-RUN ln -s /usr/bin/xvfb-chrome /usr/bin/chromium-browser
+RUN ln -sf /usr/bin/xvfb-chrome /usr/bin/google-chrome
 
 CMD [ "node" ]
